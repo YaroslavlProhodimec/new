@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/css/main.d47cbe9e.css",
-    "main.js": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/js/main.f8ff464d.js",
-    "static/js/787.39bb0775.chunk.js": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/js/787.39bb0775.chunk.js",
-    "static/media/chevron-down.svg": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/media/chevron-down.dc1bc44c12d489302229.svg",
-    "index.html": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/index.html",
-    "main.d47cbe9e.css.map": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/css/main.d47cbe9e.css.map",
-    "main.f8ff464d.js.map": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/js/main.f8ff464d.js.map",
-    "787.39bb0775.chunk.js.map": "/%3Chttps://YaroslavlProhodimec.github.io/new%3E/static/js/787.39bb0775.chunk.js.map"
+    "main.css": "/new/static/css/main.c53ab7ae.css",
+    "main.js": "/new/static/js/main.2f4d417e.js",
+    "static/js/787.39bb0775.chunk.js": "/new/static/js/787.39bb0775.chunk.js",
+    "static/media/chevron-down.svg": "/new/static/media/chevron-down.dc1bc44c12d489302229.svg",
+    "index.html": "/new/index.html",
+    "main.c53ab7ae.css.map": "/new/static/css/main.c53ab7ae.css.map",
+    "main.2f4d417e.js.map": "/new/static/js/main.2f4d417e.js.map",
+    "787.39bb0775.chunk.js.map": "/new/static/js/787.39bb0775.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d47cbe9e.css",
-    "static/js/main.f8ff464d.js"
+    "static/css/main.c53ab7ae.css",
+    "static/js/main.2f4d417e.js"
   ]
 }
