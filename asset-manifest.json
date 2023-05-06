@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/new/static/css/main.f003c111.css",
+    "main.js": "/new/static/js/main.fede7a89.js",
+    "static/js/787.39bb0775.chunk.js": "/new/static/js/787.39bb0775.chunk.js",
+    "static/media/chevron-down.svg": "/new/static/media/chevron-down.dc1bc44c12d489302229.svg",
+    "index.html": "/new/index.html",
+    "main.f003c111.css.map": "/new/static/css/main.f003c111.css.map",
+    "main.fede7a89.js.map": "/new/static/js/main.fede7a89.js.map",
+    "787.39bb0775.chunk.js.map": "/new/static/js/787.39bb0775.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f003c111.css",
+    "static/js/main.fede7a89.js"
+  ]
+}
