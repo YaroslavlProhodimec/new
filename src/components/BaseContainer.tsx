@@ -7,7 +7,7 @@ import s from "./Base.module.css";
 import styleSelect from "./main/category/select/Select.module.css";
 import Basket from "./main/basket/Basket";
 import {addPropductsAC, removePropductsAC} from "../store/basket-reducer";
-import {Snack} from "./footer/Snack";
+import {Snack} from "./footer/snack/Snack";
 import {useSearchParams} from "react-router-dom";
 import {SuperSelect} from "./main/category/select/Select";
 import Box from '@mui/material/Box';
