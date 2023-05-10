@@ -1,28 +1,30 @@
 import React from 'react';
-import {ProductsType} from "../../../../store/app-reducer";
+import {ProductsType} from "../../../../redux/app-reducer";
 import {Close} from "@mui/icons-material";
 import {ListItem} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import {removeItem} from "../../../../redux/slices/basketSlice";
+import {useAppDispatch} from "../../../../redux/store";
 
 type PropsBasketItemType = {
-    id:string
+    id: string
     name: string
     price: number
     quantity?: number
-    removeBasket:(id:string)=>void
+    removeBasket: (id: string) => void
 }
-const BasketItem = ({id,name, price, quantity,removeBasket}: PropsBasketItemType) => {
-
+const BasketItem = ({id, name, price, quantity, removeBasket}: PropsBasketItemType) => {
+    const dispatch = useAppDispatch()
 
     return (
         <ListItem>
             <Typography
-            variant={'body1'}
+                variant={'body1'}
             >
-            {name} {price}руб х{quantity}
+                {name} {price}руб х{quantity}
             </Typography>
-            <IconButton onClick={()=>removeBasket(id)}>
+            <IconButton onClick={() => dispatch(removeItem(id))}>
                 <Close/>
             </IconButton>
 

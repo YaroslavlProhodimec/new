@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import BaseContainer from "./components/BaseContainer";
-import {Login} from "./components/login/Login";
+import {Login} from "./components/pages/login/Login";
 import {BaseNotFound} from "./components/notFound404/BaseNotFound";
+import {Sneakers} from "./components/pages/sneakers/Sneakers";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
             <Route path="/" element={<BaseContainer/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/sneakers/:id" element={<Sneakers/>} />
             <Route path="*" element={<BaseNotFound/>} />
         </Routes>
     </div>

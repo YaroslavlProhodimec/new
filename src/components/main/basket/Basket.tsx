@@ -2,17 +2,20 @@ import React from 'react';
 import {Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import {ShoppingBasket} from "@mui/icons-material";
 import BasketItem from "./basketItem/BasketItem";
-import {ProductsType} from "../../../store/app-reducer";
 import Typography from "@mui/material/Typography";
+import {useAppSelector} from "../../../redux/store";
+import {selectorBasket} from "../../../redux/slices/basketSlice";
 
 type BasketPropsType = {
 
     open: boolean
     closeCart: () => void
-    basket: ProductsType[]
+    // basket: ProductsType[]
     removeBasket: (id: string) => void
 }
-const Basket = ({open, closeCart, basket, removeBasket}: BasketPropsType) => {
+const Basket = ({open, closeCart, removeBasket}: BasketPropsType) => {
+       const totalPrice =  useAppSelector(selectorBasket)
+       const basket =  useAppSelector(state=>state.basket.items)
     return (
         <>
             <Drawer
@@ -33,17 +36,13 @@ const Basket = ({open, closeCart, basket, removeBasket}: BasketPropsType) => {
                             <ListItem>Корзина пуста!</ListItem>)
                             : (
                                 <>
-                                    {basket.map(el => (
+                                    {basket.map((el:any) => (
                                         <BasketItem removeBasket={removeBasket} key={el.id} {...el}/>
                                     ))}
                         <Divider/>
                                     <ListItem>
                                         <Typography sx={{fontWeight:700}}>
-                                        Общая  стоимость:{' '}
-                                            {basket.reduce((acc,item) => {
-
-                                                return acc + item.price* item.quantity
-                                            }, 0)}{' '}
+                                        Общая  стоимость: {totalPrice}
                                         </Typography>
                                     </ListItem>
                                 </>

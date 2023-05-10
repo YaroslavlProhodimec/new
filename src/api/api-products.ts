@@ -11,5 +11,9 @@ export const appAPI = {
     category(categoryId:number) {
         console.log(categoryId)
         return   instance.get('items?'+ category(categoryId))
+    },
+    pages(id:number){
+        console.log(id)
+        return instance.get(`items?page=${id}&limit=3`)
     }
 }

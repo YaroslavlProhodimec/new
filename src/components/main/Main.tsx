@@ -12,6 +12,9 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {ImageButtonCard} from "./imageButtonCard/ImageButtonCard";
 import {Button} from "@mui/material";
+import {addItem} from "../../redux/slices/basketSlice";
+import {useAppDispatch} from "../../redux/store";
+import {NavLink} from "react-router-dom";
 
 
 type PropsMainType = {
@@ -26,9 +29,17 @@ type PropsMainType = {
 
 }
 
-export function Main({id, image, price, name, style, addBasket, setAlert, }: PropsMainType) {
+export function Main({id, image, price, name, style, setAlert, }: PropsMainType) {
+    const dispatch = useAppDispatch()
     const buttonClick = () => {
-        addBasket(id, name, price, 1)
+        const item = {
+            id,
+            name,
+            price,
+            image,
+
+        }
+       dispatch(addItem(item))
         setAlert()
     }
     return (
@@ -53,7 +64,8 @@ export function Main({id, image, price, name, style, addBasket, setAlert, }: Pro
                 title="Shrimp and Chorizo Paella"
                 subheader={style}
             />
-            <ImageButtonCard id={id} name={name} image={image}/>
+            <NavLink to={`/sneakers/${id}`}style={{ textDecoration: 'none' }}>
+            <ImageButtonCard id={id} name={name} image={image}/></NavLink>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {name}

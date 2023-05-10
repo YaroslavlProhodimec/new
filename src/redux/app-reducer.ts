@@ -1,20 +1,34 @@
 import {appAPI} from "../api/api-products";
-import {loaderAC} from "./loader";
+import {loaderAC} from "./notice-reducer";
 
 
 
-const initialState: any = [
-
-]
+const initialState: any = {
+    products: [],
+    currentPage: 1
+}
 export const productsReducer = (state: any = initialState, action: ActionsType):any => {
     switch (action.type) {
         case 'APP/SET-PRODUCTS' :
-            return action.products
+            return {
+                ...state,
+                products:  action.products,
+            }
 
         case 'CATEGORY-PRODUCTS' :
-            return action.category
+            return {
+                ...state,
+                products: action.category}
+        case 'PAGE-PRODUCTS' :
+            return {...state,
+
+                products:action.viewPageProducts
+            }
+        case 'SET-CURRENT-PAGES':
+            return {...state, currentPage: action.currentPage}
+
         default:
-            return [ ...state]
+            return {...state}
     }
 }
 
@@ -30,6 +44,8 @@ export type ProductsType = {
 
 export const getPropductsAC = (products:any) => ({type: 'APP/SET-PRODUCTS', products} as const)
 export const categoryProductsAC = (category:any) => ({type: 'CATEGORY-PRODUCTS', category} as const)
+export const pagesProductsAC = (viewPageProducts:any) => ({type: 'PAGE-PRODUCTS', viewPageProducts} as const)
+export const setCurrentPagesAC= (currentPage: number) => ({type: 'SET-CURRENT-PAGES', currentPage} as const)
 
 export const fetchProductsTC = () => (dispatch:any) => {
     dispatch(loaderAC('loading'))
@@ -42,7 +58,7 @@ export const fetchProductsTC = () => (dispatch:any) => {
 }
 export const categoryProductsTC = (id:number) => (dispatch:any) => {
     dispatch(loaderAC('loading'))
-    console.log(id)
+
     appAPI.category(id).then((res)=> {
             dispatch(categoryProductsAC(res.data))
             dispatch(loaderAC('succeeded'))
@@ -50,12 +66,27 @@ export const categoryProductsTC = (id:number) => (dispatch:any) => {
     )
 
 }
+export const pagesProductsTC = (id:number) => (dispatch:any) => {
+    dispatch(loaderAC('loading'))
+    appAPI.pages(id).then((res:  any)=> {
+            dispatch(pagesProductsAC(res.data))
+        dispatch(setCurrentPagesAC(id))
+            dispatch(loaderAC('succeeded'))
+        }
+    )
+}
+
+
 export type getPropductsACType = ReturnType<typeof getPropductsAC>
 export type categoryPropductsACType = ReturnType<typeof categoryProductsAC>
+export type pagesPropductsACType = ReturnType<typeof pagesProductsAC>
+export type setCurrentPagesACType = ReturnType<typeof setCurrentPagesAC>
 
 type ActionsType =
     | getPropductsACType
     | categoryPropductsACType
+    | pagesPropductsACType
+    | setCurrentPagesACType
 
 // [
 //     {

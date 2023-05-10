@@ -15,6 +15,6 @@ type ParamsProps = {
 
 export const authAPI = {
     login(params:ParamsProps) {
-      return   instance.post('/auth/login',params)
+      return   instance.post('auth/login',params)
     }
 }

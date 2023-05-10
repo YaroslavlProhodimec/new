@@ -8,16 +8,19 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
-import {useAppDispatch} from "../../store/store";
-import {loginTC} from "../../store/login-reducer";
+import {useAppDispatch, useAppSelector} from "../../../redux/store";
+import {loginTC} from "../../../redux/login-reducer";
 import {Simulate} from "react-dom/test-utils";
 import reset = Simulate.reset;
+import {Navigate} from "react-router-dom";
 type FormikErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
 }
+
 export const Login = () => {
+    const login = useAppSelector(state => state.login.login)
 
   const dispatch = useAppDispatch()
 
@@ -41,7 +44,9 @@ export const Login = () => {
 
         },
     })
-
+ if(login){
+        return <Navigate to={'/'}/>
+    }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'} sx={{mt:'130px'}}>

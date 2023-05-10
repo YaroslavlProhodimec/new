@@ -14,11 +14,12 @@ import {SearchParam} from "./miniHeaderComponent/search/SearchParam";
 import {motion} from "framer-motion"
 import {useState} from "react";
 import {Example} from "./miniHeaderComponent/burger/Example";
+import {useAppSelector} from "../../redux/store";
+import {selectorBasket, selectorItems} from "../../redux/slices/basketSlice";
 
 
 type PropsHeaderType = {
     openBasket: () => void
-    order: number
     setSearchParams:()=>void
     searchParams:any
     postQwery:string
@@ -29,11 +30,12 @@ const variants = {
     closed: { opacity: 0, x: "-100%" },
 }
 
-export function Header({openBasket, order,setSearchParams,searchParams,postQwery}: PropsHeaderType) {
+export function Header({openBasket,setSearchParams,searchParams,postQwery}: PropsHeaderType) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const [isOpen, setIsOpen] = useState(false)
+    const order = useAppSelector(selectorItems)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
