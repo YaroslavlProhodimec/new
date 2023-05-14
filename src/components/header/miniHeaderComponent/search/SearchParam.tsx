@@ -5,62 +5,57 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import {Box} from '@mui/material';
 import s from './SearchParam.module.css'
+import {setSearchValue} from "../../../../redux/filter/filterSlice";
+import {useDispatch} from "react-redux";
+
 
 type PropsSearchType = {
     menuId: any
     handleProfileMenuOpen: any
-    setSearchParams: (p: { post: any }) => void
-    searchParams: any
-    postQwery: string
+    searchValue:string
+    sentValue:any
 }
 
-export const SearchParam = ({
-                                menuId,
+export const SearchParam = ({menuId,
                                 handleProfileMenuOpen,
-                                setSearchParams,
-                                searchParams,
-                                postQwery
+                                searchValue,
+                                sentValue
                             }: PropsSearchType) => {
-    interface RefObject<T> {
-        readonly current: T | null
-    }
+
     const [timerId, setTimerId] = useState<number | undefined>(undefined)
-    const inputRef  = useRef<any>()
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const form = e.target
-        const query = form.search.value
+    const dispatch = useDispatch();
+    const [value, setValue] = React.useState<string>('');
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
-        if (setSearchParams) {
-            // делает студент
+    const onClickClear = () => {
+        sentValue('')
+        setValue('');
+        inputRef.current?.focus();
+    };
 
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+        if (sentValue) {
             timerId && clearTimeout(timerId)
             const id = +setTimeout(() => {
-                setSearchParams({post: query})
+                // sentValue(event.target.value)
+                dispatch(setSearchValue(value))
                 setTimerId(undefined)
             }, 1500)
             setTimerId(id)
 
-            //
         }
-    }
 
-    //  const handleSubmit = (e: any) => {
-    //     e.preventDefault()
-    //     const form = e.target
-    //     const query = form.search.value
-    //     setSearchParams({post: query})
-    // }
-const clearText = () => {
-    setSearchParams({post: ''})
-        inputRef.current.focus()
-}
+    };
+
+
+
     return (
         <>
             <Box sx={{flexGrow: 1}}/>
             <Box sx={{display: {xs: 'none', md: 'flex'}}}>
 
-                <form onSubmit={handleSubmit}>
+                <form >
 
                     <div className={s.root}>
                         <svg className={s.icon} data-name="Layer 1" id="Layer_1" viewBox="0 0 24 24"
@@ -69,10 +64,12 @@ const clearText = () => {
                                 d="M16.57,16.15A9,9,0,1,0,15,17.46h0l6.25,6.25,1.42-1.42Zm-3-.14a7.07,7.07,0,1,1,1.56-1.28A6.88,6.88,0,0,1,13.59,16Z"/>
                         </svg>
                         <input
+                            onChange={onChangeInput}
                             ref={inputRef}
+                            value={value}
                             className={s.search} name={'search'} type={"search"} placeholder={'Поиск кроссовок'}/>
-                        {postQwery &&
-                            <svg onClick={clearText} className={s.clearIcon} fill="none"
+                        {value &&
+                            <svg onClick={onClickClear} className={s.clearIcon} fill="none"
                                  height="24" viewBox="0 0 24 24" width="24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -105,4 +102,3 @@ const clearText = () => {
 function useRefLegacyRef<T>() {
     throw new Error('Function not implemented.');
 }
-

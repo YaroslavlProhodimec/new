@@ -1,5 +1,5 @@
 .select {
-position: absolute;
+    position: absolute;
     top: 88px;
     right: 106px;
     appearance: none;
@@ -35,7 +35,7 @@ position: absolute;
 }
 @media   (max-width: 1507px) {
     .select {
-       display: none;
+        display: none;
 
     }
 }

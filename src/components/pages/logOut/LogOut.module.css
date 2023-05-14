@@ -1,0 +1,39 @@
+.logout{
+/*width: 80%;*/
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 230px;
+    font-size: 53px;
+    font-family:"Roboto","Helvetica","Arial",sans-serif;
+    gap: 12px;
+    color: #1d60e0;
+}
+.exit{
+    margin: 5px;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    padding-left: 17px;
+    gap:30px
+}
+@media   (max-width: 505px) {
+    .exit {
+        display: none;
+
+    }
+}
+.repeatExit{
+
+   margin: 15px;
+
+}
+@media   (min-width: 505px) {
+    .repeatExit{
+        display: none;
+
+    }
+}

@@ -13,6 +13,7 @@ import {loginTC} from "../../../redux/login-reducer";
 import {Simulate} from "react-dom/test-utils";
 import reset = Simulate.reset;
 import {Navigate} from "react-router-dom";
+import {fetchLogin} from "../../../redux/login/asyncActions";
 type FormikErrorType = {
     email?: string
     password?: string
@@ -20,7 +21,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-    const login = useAppSelector(state => state.login.login)
+    const login = useAppSelector(state => state.login.isInitialzed)
 
   const dispatch = useAppDispatch()
 
@@ -40,7 +41,7 @@ export const Login = () => {
             return errors
         },
         onSubmit: values => {
-            dispatch(loginTC(values))
+            dispatch(fetchLogin(values))
 
         },
     })

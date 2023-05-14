@@ -4,7 +4,7 @@ import s from './Pagination.module.css';
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {pagesProductsTC} from "../../../redux/app-reducer";
 import {ArrowBack, ArrowForward} from "@mui/icons-material";
-import { setCurrentPage } from '../../../redux/slices/filterSlice';
+import { setCurrentPage } from '../../../redux/filter/filterSlice';
 
 export const SuperPagination = () => {
     const page = useAppSelector(state => state.filter.currentPage)

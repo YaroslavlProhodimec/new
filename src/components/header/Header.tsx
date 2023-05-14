@@ -1,9 +1,9 @@
 import * as React from 'react';
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -12,17 +12,15 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import {Badge, Link} from '@mui/material';
 import {SearchParam} from "./miniHeaderComponent/search/SearchParam";
 import {motion} from "framer-motion"
-import {useState} from "react";
-import {Example} from "./miniHeaderComponent/burger/Example";
-import {useAppSelector} from "../../redux/store";
-import {selectorBasket, selectorItems} from "../../redux/slices/basketSlice";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {selectorItems} from "../../redux/basket/basketSlice";
 
 
 type PropsHeaderType = {
     openBasket: () => void
-    setSearchParams:()=>void
-    searchParams:any
-    postQwery:string
+
+    searchValue:string
+    sentValue:any
 }
 
 const variants = {
@@ -30,11 +28,13 @@ const variants = {
     closed: { opacity: 0, x: "-100%" },
 }
 
-export function Header({openBasket,setSearchParams,searchParams,postQwery}: PropsHeaderType) {
+
+export function Header({openBasket,sentValue,searchValue}: PropsHeaderType) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const [isOpen, setIsOpen] = useState(false)
+    const dispatch = useAppDispatch()
     const order = useAppSelector(selectorItems)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -49,9 +49,10 @@ export function Header({openBasket,setSearchParams,searchParams,postQwery}: Prop
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
+    const handleMenuClose = (e:any) => {
         setAnchorEl(null);
         handleMobileMenuClose();
+
 
     };
 
@@ -61,6 +62,7 @@ export function Header({openBasket,setSearchParams,searchParams,postQwery}: Prop
     };
 
     const menuId = 'primary-search-account-menu';
+
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -77,8 +79,8 @@ export function Header({openBasket,setSearchParams,searchParams,postQwery}: Prop
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem  onClick={handleMenuClose}><Link href="/login" underline="none">Sign-in</Link></MenuItem>
-            <MenuItem onClick={handleMenuClose}><Link href="/" underline="none">Log-out</Link></MenuItem>
+            <MenuItem  onClick={handleMenuClose}><Link href={"/login"} underline="none">Sign-in</Link></MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link href={"/logOut"} underline="none">Log-out</Link></MenuItem>
         </Menu>
     );
 
@@ -136,7 +138,8 @@ export function Header({openBasket,setSearchParams,searchParams,postQwery}: Prop
                     >
                         БАРХАТНЫЕ ТЯГИ
                     </motion.h1>
-                    <SearchParam postQwery={postQwery} searchParams={searchParams} setSearchParams={setSearchParams} menuId={menuId}  handleProfileMenuOpen={handleProfileMenuOpen}/>
+                    <SearchParam searchValue={searchValue} sentValue={sentValue} menuId={menuId}
+                                 handleProfileMenuOpen={handleProfileMenuOpen}/>
 
                     <Box sx={{display: {xs: 'flex', md: 'none'}}}>
 

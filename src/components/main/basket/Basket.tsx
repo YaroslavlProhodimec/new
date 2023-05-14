@@ -4,7 +4,7 @@ import {ShoppingBasket} from "@mui/icons-material";
 import BasketItem from "./basketItem/BasketItem";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../../redux/store";
-import {selectorBasket} from "../../../redux/slices/basketSlice";
+import {selectorBasket} from "../../../redux/basket/basketSlice";
 
 type BasketPropsType = {
 

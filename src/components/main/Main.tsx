@@ -12,7 +12,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {ImageButtonCard} from "./imageButtonCard/ImageButtonCard";
 import {Button} from "@mui/material";
-import {addItem} from "../../redux/slices/basketSlice";
+import {addItem} from "../../redux/basket/basketSlice";
 import {useAppDispatch} from "../../redux/store";
 import {NavLink} from "react-router-dom";
 
@@ -24,13 +24,14 @@ type PropsMainType = {
     style:string
     price: number
     quantity?: number
-    addBasket: (id: string, name: string, price: number, quantity: number) => void
+
     setAlert: () => void
 
 }
 
 export function Main({id, image, price, name, style, setAlert, }: PropsMainType) {
     const dispatch = useAppDispatch()
+
     const buttonClick = () => {
         const item = {
             id,
@@ -84,10 +85,8 @@ export function Main({id, image, price, name, style, setAlert, }: PropsMainType)
                 }}>
                     Купить
                 </Button>
+                {price}
             </CardActions>
-
         </Card>
-
-
     );
 }

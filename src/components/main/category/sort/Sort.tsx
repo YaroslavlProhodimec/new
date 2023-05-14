@@ -1,8 +1,8 @@
-import React, {DetailedHTMLProps, SelectHTMLAttributes,} from 'react'
-import s from './Select.module.css'
+import React, {ChangeEvent, DetailedHTMLProps, SelectHTMLAttributes,} from 'react'
+import s from './Sort.module.css'
 import {useAppDispatch, useAppSelector} from "../../../../redux/store";
-import {categoryProductsTC} from "../../../../redux/app-reducer";
-import {setSort} from "../../../../redux/slices/filterSlice";
+import {setSort} from "../../../../redux/filter/filterSlice";
+
 
 type DefaultSelectPropsType = DetailedHTMLProps<
     SelectHTMLAttributes<HTMLSelectElement>,
@@ -12,19 +12,16 @@ type DefaultSelectPropsType = DetailedHTMLProps<
 type SuperSelectPropsType = DefaultSelectPropsType
 
 const list = [
-    {name: 'пополярности', sortProperty: 'rating'},
-    {name: 'пополярности', sortProperty: '-rating'},
-    {name: 'цене', sortProperty: 'price'},
-    {name: 'цене', sortProperty: '-price'},
+    {name: 'По популярности', sortProperty: 'rating'},
+    {name: 'По цене(рост)', sortProperty: 'price'},
+
 ]
 
 export const Sort: React.FC<SuperSelectPropsType> = ({className, onChange, ...restProps}) => {
     const value = useAppSelector((state) => state.filter.sort)
     const dispatch = useAppDispatch()
 
-    const onClickListItem = (obj:any) => {
-        dispatch(setSort(obj))
-    }
+
     const mappedOptions: any[] = list
         ? list.map((o,index) => (
             <option
@@ -38,9 +35,14 @@ export const Sort: React.FC<SuperSelectPropsType> = ({className, onChange, ...re
         ))
         : []
 
-    const onChangeCallback = (e:any) => {
-
-        dispatch(categoryProductsTC(e.currentTarget.value))
+    const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
+        const name = list[+e.currentTarget.value].name
+        const sortProperty = list[+e.currentTarget.value].sortProperty
+        const item2 = {
+            name,sortProperty
+        }
+        console.log(item2)
+       dispatch(setSort(item2))
     }
 
     const finalSelectClassName = s.select + (className ? ' ' + className : '')
@@ -48,8 +50,7 @@ export const Sort: React.FC<SuperSelectPropsType> = ({className, onChange, ...re
     return (
         <select
             className={finalSelectClassName}
-            onClick={(e)=>onChangeCallback(e)}
-            value={value}
+            onChange={onChangeCallback}
             {...restProps}
         >
             {mappedOptions}

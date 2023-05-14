@@ -3,52 +3,75 @@ import {Header} from "./header/Header";
 import {Container} from "@mui/material";
 import {Main} from "./main/Main";
 import s from "./Base.module.css";
-import styleSelect from "./main/category/select/Select.module.css";
+import styleSelect from "./main/category/sort/Sort.module.css";
 import Basket from "./main/basket/Basket";
-import basket from "./main/basket/Basket";
-import {addPropductsAC} from "../redux/basket-reducer";
 import {Snack} from "./footer/snack/Snack";
-import {NavLink, useSearchParams} from "react-router-dom";
-import {Sort,} from "./main/category/select/Select";
+import {Navigate, useSearchParams} from "react-router-dom";
+import {Sort,} from "./main/category/sort/Sort";
 import Box from '@mui/material/Box';
 import {Skeleton} from "./skeleton/Skeleton";
 import {SuperPagination} from "./footer/pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
-import {setCategoryId} from "../redux/slices/filterSlice";
-import {removeItem} from "../redux/slices/basketSlice";
-import {fetchSneakers} from "../redux/slices/sneakersSlice";
+import {setSearchValue} from "../redux/filter/filterSlice";
+import {removeItem} from "../redux/basket/basketSlice";
+import {selectFilter} from "../redux/filter/selectors";
+import {fetchSneakers} from "../redux/sneakers/asyncActions";
 
 const BaseContainer = () => {
     const sneakers = useAppSelector(state => state.sneakers.items)
     const loading = useAppSelector(state => state.sneakers.isLoading)
-// const sortType =sort.sortProperty
+    const login = useAppSelector(state => state.login.isInitialzed)
+    const { categoryId, sort, currentPage,searchValue  } = useAppSelector(selectFilter)
     const dispatch = useAppDispatch()
+    const [open, setOpen] = useState(false);
+    const [alert, setAlert] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams()
 
-    const onChangeCategory = (id:number) => {
-        dispatch(setCategoryId(id))
+    const onChangeText = (value: string) => {
+       // dispatch(setSearchValue(value))
+        const findQuery: { find?: string } = value ? {find: value} : {} // если нет - то не записывать в урл
+        const {find, ...lastQueries} = Object.fromEntries(searchParams)
+
+        setSearchParams({...lastQueries, ...findQuery})
+
+        //
     }
     const removeBasket = (id: string) => {
         dispatch(removeItem(id))
     }
-    const addBasket = (id: string, name: string, price: number, quantity: number) => {
-        dispatch(addPropductsAC(id, name, price, quantity))
-    }
-    const [open, setOpen] = useState(false);
-    const [alert, setAlert] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams()
-    const postQwery = searchParams.get('post') || '';
+    const getPizzas = async () => {
+        const sortBy = sort.sortProperty
+        const order = sort.sortProperty
+        // const category = categoryId > 0 ? String(categoryId) : '';
+        // const search = searchValue;
+        const params = Object.fromEntries(searchParams)
+        // sendQuery(params.find || '')
+        dispatch(setSearchValue(params.find || ''))
+        dispatch(
+            fetchSneakers({
+                sortBy,
+                order,
+                currentPage:String(currentPage),
+                searchValue,
+
+            }),
+        );
+        window.scrollTo(0, 0);
+    };
 
     useEffect(() => {
-        dispatch(fetchSneakers())
-    }, [])
+        getPizzas();
 
-// if(!login) {
-//     return <Navigate to={'/login'}/>
-// }
-//     console.log(sneakers)
+    }, [categoryId, sort.sortProperty, currentPage]);
+
+    console.log(searchValue)
+if(!login) {
+    return <Navigate to={'/login'}/>
+}
+
     return (
         <div className={s.baseContainer}>
-            <Header postQwery={postQwery} searchParams={searchParams} setSearchParams={setSearchParams}
+            <Header searchValue={searchValue} sentValue={onChangeText}
 
                     openBasket={() => setOpen(true)}/>
             <Sort className={styleSelect.select}/>
@@ -68,13 +91,13 @@ const BaseContainer = () => {
 
                         sneakers.filter((el: {
                             name: string;
-                        }) => el.name.toLowerCase().includes(postQwery.toLowerCase()))
+                        }) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
                             .map((el: any) =>
 
                                 <Box key={el.id} sx={{m: '6px'}}>
 
 
-                                        <Main setAlert={() => setAlert(true)} addBasket={addBasket}  {...el}/>
+                                        <Main setAlert={() => setAlert(true)}  {...el}/>
                                 </Box>
                             )}
                 </main>

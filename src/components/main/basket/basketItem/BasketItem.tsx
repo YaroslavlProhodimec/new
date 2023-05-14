@@ -4,7 +4,7 @@ import {Close} from "@mui/icons-material";
 import {ListItem} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import {removeItem} from "../../../../redux/slices/basketSlice";
+import {removeItem} from "../../../../redux/basket/basketSlice";
 import {useAppDispatch} from "../../../../redux/store";
 
 type PropsBasketItemType = {
@@ -14,7 +14,7 @@ type PropsBasketItemType = {
     quantity?: number
     removeBasket: (id: string) => void
 }
-const BasketItem = ({id, name, price, quantity, removeBasket}: PropsBasketItemType) => {
+const BasketItem = ({id, name, price, quantity}: PropsBasketItemType) => {
     const dispatch = useAppDispatch()
 
     return (

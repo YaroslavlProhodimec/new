@@ -24,6 +24,10 @@ export const basketSlice = createSlice({
         },
         removeItem(state,action){
             state.items = state.items.filter((el:any)=>el.id !== action.payload)
+            state.totalPrice = state.items.reduce((sum: any, el: any) => {
+                return sum + (el.price * el.quantity)
+            }, 0);
+
 
         },
         clearItem(state){
