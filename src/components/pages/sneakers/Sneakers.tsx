@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import s from './Sneakers.module.css'
+import {Sneaker} from "./sneaker/Sneaker";
 
 export const Sneakers = () => {
    const [sneaker,setSneaker] = useState<any>([])
@@ -15,16 +17,16 @@ export const Sneakers = () => {
                  alert('Не существует')
                 navigate('/')
             }
-
         }
         fetchSneaker()
     },[])
     if(!sneaker){
         return <div>' Загрузка...'</div>
     }
+
     return (
-        <div>
-            <img src={sneaker.image} alt=""/>
+        <div className={s.sneakers}>
+           < Sneaker id={id} />
             <p>
                 {sneaker.name}
             </p>

@@ -21,9 +21,7 @@ const loginSlice = createSlice({
     },
     extraReducers: {
         [fetchLogin.pending]: (state) => {
-
-
-        },
+            },
         [fetchLogin.fulfilled]: (state, action) => {
             state.isInitialzed = true
 

@@ -1,6 +1,4 @@
-
-
-import React, {LegacyRef, RefObject, useRef, useState} from 'react';
+import React, {  KeyboardEvent, useState} from 'react';
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import {Box} from '@mui/material';
@@ -47,16 +45,19 @@ export const SearchParam = ({menuId,
         }
 
     };
+    const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
 
-
+      if(e.key === 'Enter') {
+          dispatch(setSearchValue(value))
+          sentValue(value)
+      }
+    }
 
     return (
         <>
             <Box sx={{flexGrow: 1}}/>
             <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-
-                <form >
-
+                <div>
                     <div className={s.root}>
                         <svg className={s.icon} data-name="Layer 1" id="Layer_1" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg"><title/>
@@ -64,6 +65,7 @@ export const SearchParam = ({menuId,
                                 d="M16.57,16.15A9,9,0,1,0,15,17.46h0l6.25,6.25,1.42-1.42Zm-3-.14a7.07,7.07,0,1,1,1.56-1.28A6.88,6.88,0,0,1,13.59,16Z"/>
                         </svg>
                         <input
+                            onKeyPress={onKeyPressCallback}
                             onChange={onChangeInput}
                             ref={inputRef}
                             value={value}
@@ -80,7 +82,7 @@ export const SearchParam = ({menuId,
                                       fill="currentColor" fill-rule="evenodd"/>
                             </svg>
                         }                </div>
-                </form>
+                </div>
 
                 <IconButton
 

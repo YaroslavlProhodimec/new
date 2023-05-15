@@ -17,10 +17,12 @@ import {removeItem} from "../redux/basket/basketSlice";
 import {selectFilter} from "../redux/filter/selectors";
 import {fetchSneakers} from "../redux/sneakers/asyncActions";
 
+
 const BaseContainer = () => {
     const sneakers = useAppSelector(state => state.sneakers.items)
     const loading = useAppSelector(state => state.sneakers.isLoading)
     const login = useAppSelector(state => state.login.isInitialzed)
+
     const { categoryId, sort, currentPage,searchValue  } = useAppSelector(selectFilter)
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false);
@@ -28,7 +30,7 @@ const BaseContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const onChangeText = (value: string) => {
-       // dispatch(setSearchValue(value))
+
         const findQuery: { find?: string } = value ? {find: value} : {} // если нет - то не записывать в урл
         const {find, ...lastQueries} = Object.fromEntries(searchParams)
 
@@ -42,19 +44,14 @@ const BaseContainer = () => {
     const getPizzas = async () => {
         const sortBy = sort.sortProperty
         const order = sort.sortProperty
-        // const category = categoryId > 0 ? String(categoryId) : '';
-        // const search = searchValue;
         const params = Object.fromEntries(searchParams)
-        // sendQuery(params.find || '')
         dispatch(setSearchValue(params.find || ''))
         dispatch(
             fetchSneakers({
                 sortBy,
                 order,
                 currentPage:String(currentPage),
-                searchValue,
-
-            }),
+                searchValue,}),
         );
         window.scrollTo(0, 0);
     };
@@ -64,7 +61,7 @@ const BaseContainer = () => {
 
     }, [categoryId, sort.sortProperty, currentPage]);
 
-    console.log(searchValue)
+
 if(!login) {
     return <Navigate to={'/login'}/>
 }

@@ -5,37 +5,36 @@ import { motion } from 'framer-motion';
 import {fetchLogOut} from "../../../redux/login/asyncActions";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {Navigate} from "react-router-dom";
-import login from "../../../redux/login/loginSlice";
 export const LogOut = () => {
     const dispatch = useAppDispatch()
-  const login =  useAppSelector(state=>state.login.isInitialzed)
-    console.log(login,'logoutComponent')
-    const onClickOn = (e:any) => {
+   const login =  useAppSelector(state=>state.login.isInitialzed)
 
-        dispatch(fetchLogOut())
 
-    };
+    // const onClickOn = (e:any) => {
+    //
+    //     dispatch(fetchLogOut())
+    // };
     if(!login) {
         return <Navigate to={'/login'}/>
     }
     return (
         <div className={s.logout}>
-            <motion.h1 className ={s.exit}
-                animate={
-                {fontSize: "3rem",
-                    x: 20, y: -10
-                }
-            }>
+            {/*<motion.h1 className ={s.exit}*/}
+            {/*    animate={*/}
+            {/*    {fontSize: "3rem",*/}
+            {/*        x: 20, y: -10*/}
+            {/*    }*/}
+            {/*}>*/}
 
-                Вы действительно хотите выйти?
-            </motion.h1>
-            <motion.h1 animate={
-                {fontSize: "3rem",x: 20, y: -10}
-            } className={s.repeatExit}>Выходим?</motion.h1>
-            <div className={s.buttons}>
-            <Button onClick={onClickOn} variant={"contained"}>да</Button>
-            <Button variant={"contained"}>нет</Button>
-            </div>
+            {/*    Вы действительно хотите выйти?*/}
+            {/*</motion.h1>*/}
+            {/*<motion.h1 animate={*/}
+            {/*    {fontSize: "3rem",x: 20, y: -10}*/}
+            {/*} className={s.repeatExit}>Выходим?</motion.h1>*/}
+            {/*<div className={s.buttons}>*/}
+            {/*<Button onClick={onClickOn} variant={"contained"}>да</Button>*/}
+            {/*<Button variant={"contained"}>нет</Button>*/}
+            {/*</div>*/}
         </div>
     );
 };
