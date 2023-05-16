@@ -9,11 +9,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
-import {loginTC} from "../../../redux/login-reducer";
 import {Simulate} from "react-dom/test-utils";
-import reset = Simulate.reset;
 import {Navigate} from "react-router-dom";
 import {fetchLogin} from "../../../redux/login/asyncActions";
+
 type FormikErrorType = {
     email?: string
     password?: string

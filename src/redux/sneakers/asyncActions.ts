@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {SneakerItem} from "../basket/basketSlice";
+import {SneakerItem} from "../basket/types";
+
 
 
 export const fetchSneakers = createAsyncThunk<SneakerItem[], Record<string, string>>(
     'pizza/fetchPizzasStatus',
     async (params:Record<string, string> ) => {
         const { sortBy, order, category, search, currentPage } = params;
-        console.log(params, 4444);
         const { data } = await axios.get<SneakerItem[]>(`https://64542d14c18adbbdfeb0f6bc.mockapi.io/items`
             ,{
             params:

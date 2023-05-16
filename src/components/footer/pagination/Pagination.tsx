@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react';
 import {Pagination, PaginationItem, Stack} from '@mui/material'
 import s from './Pagination.module.css';
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
-import {pagesProductsTC} from "../../../redux/app-reducer";
 import {ArrowBack, ArrowForward} from "@mui/icons-material";
 import { setCurrentPage } from '../../../redux/filter/filterSlice';
 import {selectFilter} from "../../../redux/filter/selectors";

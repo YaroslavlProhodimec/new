@@ -13,10 +13,12 @@ type PropsBasketItemType = {
     quantity?: number
 }
 const BasketItem = ({id, name, price, quantity}: PropsBasketItemType) => {
+
     const dispatch = useAppDispatch()
 const onClickRemove = (id: any) => {
     dispatch(removeItem(id))
 }
+
     return (
         <ListItem>
             <Typography

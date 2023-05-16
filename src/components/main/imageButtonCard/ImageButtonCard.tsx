@@ -2,6 +2,7 @@ import * as React from 'react';
 import {styled} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ButtonBase from "@mui/material/ButtonBase";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
 
 const ImageButton = styled(ButtonBase)(({theme}) => ({
@@ -70,9 +71,12 @@ const ImageMarked = styled('span')(({theme}) => ({
 type PropsImageButtonType = {
     id: string
     image?:any
-    name:string
 }
-export  function ImageButtonCard({id,image,name}:PropsImageButtonType) {
+export  function ImageButtonCard({id,image}:PropsImageButtonType) {
+    // useWhyDidYouUpdate('ImageButtonCard', {
+    //     id,image,name
+    // })
+
     return (
         <ImageButton
             focusRipple

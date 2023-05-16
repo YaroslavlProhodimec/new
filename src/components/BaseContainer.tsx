@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Header} from "./header/Header";
 import {Container} from "@mui/material";
 import {Main} from "./main/Main";
@@ -13,14 +13,15 @@ import {Skeleton} from "./skeleton/Skeleton";
 import {SuperPagination} from "./footer/pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
 import {setSearchValue} from "../redux/filter/filterSlice";
-import {removeItem, SneakerItem} from "../redux/basket/basketSlice";
 import {selectFilter} from "../redux/filter/selectors";
 import {fetchSneakers} from "../redux/sneakers/asyncActions";
 import {selectSneakers} from "../redux/sneakers/selectors";
 import {selectLogin} from "../redux/login/selectors";
 
 
+
 const BaseContainer = () => {
+
     const {items,isLoading} = useAppSelector(selectSneakers)
     const login = useAppSelector(selectLogin)
     const { categoryId, sort, currentPage,searchValue } = useAppSelector(selectFilter)
@@ -28,11 +29,17 @@ const BaseContainer = () => {
     const [open, setOpen] = useState(false);
     const [alert, setAlert] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams()
-    const onChangeText = (value: string) => {
+
+    const openBasket =  useCallback( ()=> setOpen(true),[])
+    const closeBasket = useCallback(() => setOpen(false),[])
+    const alertNoticeFalse = useCallback(() => setAlert(false),[])
+    const alertNoticeTrue = useCallback(() => setAlert(true),[])
+
+    const onChangeText  = useCallback( (value: string) => {
         const findQuery: { find?: string } = value ? {find: value} : {}
         const {find, ...lastQueries} = Object.fromEntries(searchParams)
         setSearchParams({...lastQueries, ...findQuery})
-    }
+    },[])
     const getPizzas = async () => {
         const sortBy = sort.sortProperty
         const order = sort.sortProperty
@@ -59,27 +66,27 @@ const BaseContainer = () => {
     return (
         <div className={s.baseContainer}>
             <Header searchValue={searchValue} sentValue={onChangeText}
-                    openBasket={() => setOpen(true)}/>
+                    openBasket={openBasket}/>
             <SortSelect className={styleSelect.select}/>
             <Container sx={{mt: '1rem',}}>
                 <main className={s.mainContainer}>
                     {isLoading === 'loading' ?
                         [...new Array(4)].map((_, index) =>
-                            <Box sx={{m: '6px'}}>
-                                <Skeleton key={index}/>
+                            <Box key={index} sx={{m: '6px'}}>
+                                <Skeleton />
                             </Box>)
                         :
                         items.filter((el: {
                             name: string; }) => el.name.toLowerCase().includes(searchValue.toLowerCase()))
                             .map((el:any) =>
                                 <Box key={el.id} sx={{m: '6px'}}>
-                                    <Main setAlert={() => setAlert(true)}  {...el}/>
+                                    <Main setAlert={alertNoticeTrue}  {...el}/>
                                 </Box>)}
                 </main>
                 <SuperPagination/>
             </Container>
-            <Basket  open={open} closeCart={() => setOpen(false)}/>
-            <Snack onClose={() => setAlert(false)} isOpen={alert}/>
+            <Basket  open={open} closeCart={closeBasket}/>
+            <Snack onClose={alertNoticeFalse} isOpen={alert}/>
 
         </div>
     );

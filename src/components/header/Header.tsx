@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useCallback} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,38 +12,35 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import {Badge, Link} from '@mui/material';
 import {SearchParam} from "./miniHeaderComponent/search/SearchParam";
 import {motion} from "framer-motion"
-import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {selectorItems} from "../../redux/basket/basketSlice";
+import {useAppSelector} from "../../redux/store";
+import {selectorItems} from "../../redux/basket/selectors";
 
 
 type PropsHeaderType = {
     openBasket: () => void
 
     searchValue:string
-    sentValue:any
+    sentValue:(value: string) => void
 }
 
-const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: "-100%" },
-}
+
 
 
 export function Header({openBasket,sentValue,searchValue}: PropsHeaderType) {
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
     const order = useAppSelector(selectorItems)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleProfileMenuOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
-    };
+    },[])
 
-    const handleMobileMenuClose = () => {
+    const handleMobileMenuClose = useCallback( () => {
         setMobileMoreAnchorEl(null);
-    };
+    },[])
 
     const handleMenuClose = () => {
         setAnchorEl(null);
@@ -154,7 +151,6 @@ export function Header({openBasket,sentValue,searchValue}: PropsHeaderType) {
 
                     <IconButton onClick={openBasket} sx={{marginLeft: '7px'}}>
                         <Badge color={'secondary'} badgeContent={order}>
-
                             <ShoppingBasketIcon/>
                         </Badge>
 

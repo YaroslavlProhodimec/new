@@ -22,7 +22,7 @@ type ResponseData = {
     resultCode: 0
 }
 
-export const fetchLogin = createAsyncThunk<any, any>(
+export const fetchLogin = createAsyncThunk<ResponseData, any>(
     'login/fetchLoginStatus',
     async (params: ParamsProps) => {
 

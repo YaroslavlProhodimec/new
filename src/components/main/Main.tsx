@@ -7,9 +7,10 @@ import Avatar from '@mui/material/Avatar';
 import s from '../main/Main.module.css';
 import {ImageButtonCard} from "./imageButtonCard/ImageButtonCard";
 import {Button} from "@mui/material";
-import {addItem, SneakerItem} from "../../redux/basket/basketSlice";
+import {addItem} from "../../redux/basket/basketSlice";
 import {useAppDispatch} from "../../redux/store";
 import {NavLink} from "react-router-dom";
+import {SneakerItem} from "../../redux/basket/types";
 
 
 type PropsMainType = {
@@ -22,7 +23,7 @@ type PropsMainType = {
     setAlert: () => void
 }
 
-export function Main({id, image, price, name, setAlert}: PropsMainType) {
+export const  Main= React.memo(({id, image, price, name, setAlert}: PropsMainType) => {
     const dispatch = useAppDispatch()
     const buttonClick = () => {
         const item: SneakerItem = {
@@ -44,7 +45,7 @@ export function Main({id, image, price, name, setAlert}: PropsMainType) {
                 avatar={
                     <Avatar sx={{bgcolor: 'skyBlue',}}>БТ</Avatar>}/>
             <NavLink to={`/sneakers/${id}`} style={{textDecoration: 'none'}}>
-                <ImageButtonCard id={id} name={name} image={image}/></NavLink>
+                <ImageButtonCard id={id}  image={image}/></NavLink>
             <CardContent>
                 <span className={s.name}>
                     {name}
@@ -61,4 +62,4 @@ export function Main({id, image, price, name, setAlert}: PropsMainType) {
             </CardActions>
         </Card>
     );
-}
+})

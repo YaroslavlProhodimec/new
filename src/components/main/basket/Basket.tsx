@@ -4,8 +4,8 @@ import {ShoppingBasket} from "@mui/icons-material";
 import BasketItem from "./basketItem/BasketItem";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../../redux/store";
-import {selectorBasket} from "../../../redux/basket/basketSlice";
 import s from './Basket.module.css'
+import {selectorBasket} from "../../../redux/basket/selectors";
 type BasketPropsType = {
     open: boolean
     closeCart: () => void
@@ -13,6 +13,15 @@ type BasketPropsType = {
 export const Basket = ({open, closeCart}: BasketPropsType) => {
     const {totalPrice} = useAppSelector(selectorBasket)
     const {items} = useAppSelector(selectorBasket)
+    const isMounted = React.useRef(false);
+
+    React.useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem('sneakers', json);
+        }
+        isMounted.current = true;
+    }, [items]);
     return (<>
             <Drawer
                 anchor={"right"}

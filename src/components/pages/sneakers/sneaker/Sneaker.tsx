@@ -4,7 +4,7 @@ import {motion, useMotionValue, useTransform} from "framer-motion";
 import Button from "@mui/material/Button";
 import {fadeIn} from "../../../../variants";
 import {TypeAnimation} from "react-type-animation";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import nikeGreen from "../../../../img/nikeGreen.png";
 import nikePink from "../../../../img/nikePink.png";
 import adidasBrown from '../../../../img/adidasBrown.png'
@@ -14,6 +14,7 @@ import balanseaga from '../../../../img/balanseaga.png'
 import adidasGold from '../../../../img/adidasGold.png'
 import adidasPink from '../../../../img/adidasPink.png'
 import nikeBlack from '../../../../img/nikeBlack.png'
+
 const photos = [
     {id:'0',image:adidasBrown},
     {id:'1',image:nikeYellow},
@@ -115,7 +116,7 @@ export const Sneaker = ({id,sneaker}:PropsSneaker) => {
 
                     >
                         {photos.map(el => el.id === id ?
-                            <img className={s.img} src={el.image} draggable='false' alt=""/> : null
+                            <img key={el.id} className={s.img} src={el.image} draggable='false' alt=""/> : null
                         )}
 
                     </motion.div>

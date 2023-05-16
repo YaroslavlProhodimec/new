@@ -1,10 +1,8 @@
 import React from 'react';
 import s from './LogOut.module.css'
-import {Button} from "@mui/material";
-import { motion } from 'framer-motion';
-import {fetchLogOut} from "../../../redux/login/asyncActions";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {Navigate} from "react-router-dom";
+
 export const LogOut = () => {
     const dispatch = useAppDispatch()
    const login =  useAppSelector(state=>state.login.isInitialzed)

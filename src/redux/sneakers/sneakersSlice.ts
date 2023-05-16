@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchSneakers} from "./asyncActions";
-import {SneakerItem} from "../basket/basketSlice";
+import {SneakerItem} from "../basket/types";
+
 
 
 
