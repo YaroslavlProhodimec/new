@@ -33,23 +33,19 @@ export function Header({openBasket,sentValue,searchValue}: PropsHeaderType) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const [isOpen, setIsOpen] = useState(false)
-    const dispatch = useAppDispatch()
     const order = useAppSelector(selectorItems)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-
         setAnchorEl(event.currentTarget);
-
     };
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = (e:any) => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
 

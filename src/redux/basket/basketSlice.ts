@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "../store";
 
 
 export type SneakerItem = {
@@ -34,27 +35,23 @@ export const basketSlice = createSlice({
                state.totalPrice = state.items.reduce((sum: any, el: any) => {
                    return sum + (el.price * el.quantity)
                }, 0);
-
-
-        },
+            },
         removeItem(state,action:PayloadAction<SneakerItem>){
             state.items = state.items.filter((el:any)=>el.id !== action.payload)
             state.totalPrice = state.items.reduce((sum: any, el: any) => {
                 return sum + (el.price * el.quantity)
             }, 0);
-
-
-        },
+            },
         clearItem(state){
             state.items = []
             state.totalPrice = 0
         }
     }
 })
-export const selectorBasket = (state:any) => (state.basket.totalPrice)
-export const selectorItems = (state:any) => (state.basket.items.length)
+export const selectorBasket = (state:RootState) => (state.basket)
+export const selectorItems = (state:RootState) => (state.basket.items.length)
 export const {addItem,
     removeItem,
-    clearItem} = basketSlice.actions
+    } = basketSlice.actions
 
 export default basketSlice.reducer

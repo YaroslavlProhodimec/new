@@ -1,5 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from "axios";
+
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
@@ -8,18 +9,25 @@ export const instance = axios.create({
     }
 })
 type ParamsProps = {
-    email:string
-    password:string
-    rememberMe:boolean
+    email: string
+    password: string
+    rememberMe: boolean
 }
-
+type ResponseData = {
+    data: {
+        userId: string
+    }
+    fieldErrors: []
+    messages: []
+    resultCode: 0
+}
 
 export const fetchLogin = createAsyncThunk<any, any>(
     'login/fetchLoginStatus',
-    async (params:ParamsProps) => {
-        console.log(params, 4444);
-        const { data } = await instance.post<any>('auth/login'
-            ,params
+    async (params: ParamsProps) => {
+
+        const {data} = await instance.post<ResponseData>('auth/login'
+            , params
         );
 
         return data;
@@ -28,9 +36,7 @@ export const fetchLogin = createAsyncThunk<any, any>(
 export const fetchLogOut = createAsyncThunk(
     'fetchLogOut/fetchLogOutStatus',
     async () => {
-        console.log( 'fetchLogOut');
-        const { data } = await instance.delete('auth/login');
-
+        const {data} = await instance.delete('auth/login');
         return data;
     },
 );

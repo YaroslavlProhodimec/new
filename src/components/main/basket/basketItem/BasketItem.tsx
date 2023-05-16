@@ -1,5 +1,4 @@
 import React from 'react';
-import {ProductsType} from "../../../../redux/app-reducer";
 import {Close} from "@mui/icons-material";
 import {ListItem} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -12,22 +11,21 @@ type PropsBasketItemType = {
     name: string
     price: number
     quantity?: number
-    removeBasket: (id: string) => void
 }
 const BasketItem = ({id, name, price, quantity}: PropsBasketItemType) => {
     const dispatch = useAppDispatch()
-
+const onClickRemove = (id: any) => {
+    dispatch(removeItem(id))
+}
     return (
         <ListItem>
             <Typography
                 variant={'body1'}
-            >
-                {name} {price}$ х{quantity}
+            >{name} {price}$ х{quantity}
             </Typography>
-            <IconButton onClick={() => dispatch(removeItem(id))}>
+            <IconButton onClick={()=>onClickRemove(id)}>
                 <Close/>
             </IconButton>
-
         </ListItem>
     );
 };

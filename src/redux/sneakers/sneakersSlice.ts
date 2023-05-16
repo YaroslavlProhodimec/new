@@ -2,13 +2,20 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchSneakers} from "./asyncActions";
 import {SneakerItem} from "../basket/basketSlice";
 
+
+
+export enum Status {
+    LOADING ='loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
+}
 interface SneakersSliceState {
     items:SneakerItem[]
-    isLoading:'loading' | 'succeeded'
+    isLoading:Status
 }
 export const initialState:SneakersSliceState = {
     items: [],
-    isLoading: 'loading'
+    isLoading: Status.LOADING
 }
 
 
@@ -24,15 +31,15 @@ const sneakersSlice = createSlice({
     },
     extraReducers:(builder) =>{
         builder.addCase(fetchSneakers.pending,(state,action)=> {
-            state.isLoading = 'loading'
+            state.isLoading = Status.LOADING
             state.items = []
         })
         builder.addCase(fetchSneakers.fulfilled,(state,action)=> {
-            state.isLoading = 'succeeded'
+            state.isLoading = Status.SUCCESS
             state.items = action.payload
         })
         builder.addCase(fetchSneakers.rejected,(state,action)=> {
-            state.isLoading = 'succeeded'
+            state.isLoading = Status.ERROR
             state.items = []
         })
     }

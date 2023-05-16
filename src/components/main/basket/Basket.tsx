@@ -5,25 +5,21 @@ import BasketItem from "./basketItem/BasketItem";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../../redux/store";
 import {selectorBasket} from "../../../redux/basket/basketSlice";
-
+import s from './Basket.module.css'
 type BasketPropsType = {
-
     open: boolean
     closeCart: () => void
-    // basket: ProductsType[]
-    removeBasket: (id: string) => void
 }
-const Basket = ({open, closeCart, removeBasket}: BasketPropsType) => {
-       const totalPrice =  useAppSelector(selectorBasket)
-       const basket =  useAppSelector(state=>state.basket.items)
-    return (
-        <>
+export const Basket = ({open, closeCart}: BasketPropsType) => {
+    const {totalPrice} = useAppSelector(selectorBasket)
+    const {items} = useAppSelector(selectorBasket)
+    return (<>
             <Drawer
                 anchor={"right"}
                 open={open}
                 onClose={closeCart}
             >
-                <List sx={{width: '400px'}}>
+                <List className={s.list} >
                     <ListItem>
                         <ListItemIcon>
                             <ShoppingBasket/>
@@ -32,17 +28,17 @@ const Basket = ({open, closeCart, removeBasket}: BasketPropsType) => {
                     </ListItem>
                     <Divider/>
                     {
-                        !basket.length ? (
-                            <ListItem>Корзина пуста!</ListItem>)
+                        !items.length ? (
+                                <ListItem>Корзина пуста!</ListItem>)
                             : (
                                 <>
-                                    {basket.map((el:any) => (
-                                        <BasketItem removeBasket={removeBasket} key={el.id} {...el}/>
+                                    {items.map((el: any) => (
+                                        <BasketItem key={el.id} {...el}/>
                                     ))}
-                        <Divider/>
+                                    <Divider/>
                                     <ListItem>
-                                        <Typography sx={{fontWeight:700}}>
-                                        Общая  стоимость: {totalPrice}$
+                                        <Typography sx={{fontWeight: 700}}>
+                                            Общая стоимость:{totalPrice}$
                                         </Typography>
                                     </ListItem>
                                 </>
@@ -52,5 +48,3 @@ const Basket = ({open, closeCart, removeBasket}: BasketPropsType) => {
         </>
     );
 };
-
-export default Basket;

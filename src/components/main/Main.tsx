@@ -16,39 +16,35 @@ type PropsMainType = {
     id: string
     image?: any
     name: string
-    style:string
+    style: string
     price: number
     quantity?: number
     setAlert: () => void
 }
 
-export function Main({id, image, price, name, style, setAlert, }: PropsMainType) {
+export function Main({id, image, price, name, setAlert}: PropsMainType) {
     const dispatch = useAppDispatch()
     const buttonClick = () => {
-        const item:SneakerItem = {
+        const item: SneakerItem = {
             quantity: 0,
             id,
             name,
             price,
             image
         }
-       dispatch(addItem(item))
-        setAlert()}
+        dispatch(addItem(item))
+        setAlert()
+    }
     return (
         <Card sx={{
-            // m: '3px',
             maxWidth: 345,
             background: 'linear-gradient(89.9deg, rgb(208, 246, 255) 0.1%, rgb(255, 237, 237) 47.9%, rgb(255, 255, 231) 100.2%)'
         }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{bgcolor: 'skyBlue',
-                    }} aria-label="recipe">
-                        БТ
-                    </Avatar>}
-            />
-            <NavLink to={`/sneakers/${id}`}style={{ textDecoration: 'none' }}>
-            <ImageButtonCard id={id} name={name} image={image}/></NavLink>
+                    <Avatar sx={{bgcolor: 'skyBlue',}}>БТ</Avatar>}/>
+            <NavLink to={`/sneakers/${id}`} style={{textDecoration: 'none'}}>
+                <ImageButtonCard id={id} name={name} image={image}/></NavLink>
             <CardContent>
                 <span className={s.name}>
                     {name}
@@ -61,8 +57,7 @@ export function Main({id, image, price, name, style, setAlert, }: PropsMainType)
                 }}>
                     Купить
                 </Button>
-                <span className={s.price}> {price}$</span>
-
+                <span className={s.price}>{price}$</span>
             </CardActions>
         </Card>
     );

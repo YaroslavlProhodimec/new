@@ -1,12 +1,9 @@
-import {AnyAction} from 'redux'
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {ThunkDispatch} from 'redux-thunk'
 import {configureStore} from "@reduxjs/toolkit";
 import filter from './filter/filterSlice'
 import basket from './basket/basketSlice'
 import sneakers from './sneakers/sneakersSlice'
 import login from './login/loginSlice'
-
 
 
 export const store = configureStore({
@@ -19,8 +16,6 @@ export const store = configureStore({
 
 })
 export type RootState = ReturnType<typeof store.getState>
-export type AppThunkDispatch = ThunkDispatch<any, any, AnyAction>
-
 type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

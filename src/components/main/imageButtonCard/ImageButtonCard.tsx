@@ -1,19 +1,6 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import {styled} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ButtonBase from "@mui/material/ButtonBase";
 
 
@@ -80,26 +67,17 @@ const ImageMarked = styled('span')(({theme}) => ({
     left: 'calc(50% - 9px)',
     transition: theme.transitions.create('opacity'),
 }));
-
-
 type PropsImageButtonType = {
     id: string
     image?:any
     name:string
-
 }
 export  function ImageButtonCard({id,image,name}:PropsImageButtonType) {
-
-
     return (
         <ImageButton
             focusRipple
             key={id}
-            style={{
-                width:'100%'
-            }}
-        >
-
+            style={{width:'100%'}}>
             <ImageSrc style={{backgroundImage: `url(${image})`}}/>
             <ImageBackdrop className="MuiImageBackdrop-root"/>
             <Image>
@@ -111,17 +89,11 @@ export  function ImageButtonCard({id,image,name}:PropsImageButtonType) {
                         position: 'relative',
                         p: 4,
                         pt: 2,
-                        pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                    }}
-                >
+                        pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,}}>
                     Смотреть
                     <ImageMarked className={"MuiImageMarked-root"}/>
                 </Typography>
             </Image>
         </ImageButton>
-
-
-
-
     );
 }
