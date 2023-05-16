@@ -11,7 +11,6 @@ import login from './login/loginSlice'
 
 export const store = configureStore({
   reducer:{
-
       filter,
       basket,
       sneakers,

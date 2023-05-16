@@ -42,7 +42,7 @@ const Basket = ({open, closeCart, removeBasket}: BasketPropsType) => {
                         <Divider/>
                                     <ListItem>
                                         <Typography sx={{fontWeight:700}}>
-                                        Общая  стоимость: {totalPrice}
+                                        Общая  стоимость: {totalPrice}$
                                         </Typography>
                                     </ListItem>
                                 </>

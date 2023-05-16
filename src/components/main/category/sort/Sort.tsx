@@ -36,13 +36,10 @@ export const Sort: React.FC<SuperSelectPropsType> = ({className, onChange, ...re
         : []
 
     const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
-        const name = list[+e.currentTarget.value].name
-        const sortProperty = list[+e.currentTarget.value].sortProperty
-        const item2 = {
-            name,sortProperty
-        }
-        console.log(item2)
-       dispatch(setSort(item2))
+        const item = list[+e.currentTarget.value].name && list[+e.currentTarget.value].sortProperty
+
+
+       dispatch(setSort(item))
     }
 
     const finalSelectClassName = s.select + (className ? ' ' + className : '')

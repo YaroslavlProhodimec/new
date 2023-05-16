@@ -1,9 +1,16 @@
+.span{
+    font-size: 30px;
+    font-family: 'Indie Flower', cursive;
+    color: #1d60e0;
+}
 .cardContainer{
+    margin-top: 180px;
     max-width: 400px;
     min-height: 300px;
     height: 100%;
     position: relative;
 }
+
 .card{
 
     width:426px;
@@ -15,6 +22,17 @@
     padding-top: 24px;
     cursor: pointer;
 }
+@media   (max-width: 707px){
+    .card{
+        width:360px;
+    }
+}
+@media   (max-width: 400px){
+    .card{
+        width:330px;
+    }
+}
+
 .cardLogo{
     margin-bottom: 6px;
 }
@@ -22,11 +40,13 @@
     font-size: 40px;
     margin-bottom: 6px;
  font-weight: bold;
-
+    font-family: 'Indie Flower', cursive;
+    color: #1d60e0;
 }
 .cardSubtitle{
+    font-family: 'Indie Flower', cursive;
     max-width: 300px;
-    color:black;
+    color: #1d60e0;
     margin-bottom: 6px;
 }
 .priceWrapper{
@@ -36,19 +56,11 @@
     margin-bottom: 12px;
 
 }
-.btn{
-    background-color: #2d2b2c;
-    color: ghostwhite;
-    font-size: 20px;
-    padding-top: 16px;
-    padding-bottom: 40px;
-    border-radius: 3%;
 
-}
 .price{
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: #c609f1;
 
 }
 .colors{
@@ -57,18 +69,42 @@
 
 }
 .color{
-    width: 8px;
-    height: 8px;
-border-radius: 3%;
-    cursor: pointer;
-
+    width: 28px;
+    height: 28px;
+border-radius: 15%;
+margin-bottom: 5px;
 }
 .cardImage{
     position: absolute;
-    top: 12px;
-    left: 64px;
-    width: 620px;
+    top: 95px;
+    right:-70px;
+    /*left:272px;*/
+
+    /*width: 320px;*/
+
 }
-.img{
-    width: 50%;
+@media   (max-width: 707px){
+    .cardImage{
+        position: absolute;
+        top: 173px;
+        right:-64px;
+
+    }
+    .img{
+
+        width: 80%;
+    }
 }
+@media   (max-width: 400px){
+    .cardImage{
+        position: absolute;
+        top: 183px;
+        right:-74px;
+
+    }
+    .img{
+
+        width: 60%;
+    }
+}
+

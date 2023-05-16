@@ -22,7 +22,7 @@ const BasketItem = ({id, name, price, quantity}: PropsBasketItemType) => {
             <Typography
                 variant={'body1'}
             >
-                {name} {price}руб х{quantity}
+                {name} {price}$ х{quantity}
             </Typography>
             <IconButton onClick={() => dispatch(removeItem(id))}>
                 <Close/>

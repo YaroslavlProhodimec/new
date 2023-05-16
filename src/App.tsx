@@ -9,7 +9,7 @@ import {LogOut} from "./components/pages/logOut/LogOut";
 
 function App() {
   return (
-    <div className="App">
+    <div className={"App"}>
         <Routes>
             <Route path="/" element={<BaseContainer/>} />
             <Route path="/login" element={<Login/>} />

@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import s from './Sneakers.module.css'
 import {Sneaker} from "./sneaker/Sneaker";
+import {CircularProgress} from "@mui/material";
 
 export const Sneakers = () => {
    const [sneaker,setSneaker] = useState<any>([])
@@ -20,16 +21,18 @@ export const Sneakers = () => {
         }
         fetchSneaker()
     },[])
-    if(!sneaker){
-        return <div>' Загрузка...'</div>
-    }
 
+    if(!sneaker){
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
     return (
         <div className={s.sneakers}>
-           < Sneaker id={id} />
-            <p>
-                {sneaker.name}
-            </p>
+
+           < Sneaker id={id} sneaker={sneaker} />
+
         </div>
     );
 };

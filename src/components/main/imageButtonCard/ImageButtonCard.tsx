@@ -115,7 +115,7 @@ export  function ImageButtonCard({id,image,name}:PropsImageButtonType) {
                     }}
                 >
                     Смотреть
-                    <ImageMarked className="MuiImageMarked-root"/>
+                    <ImageMarked className={"MuiImageMarked-root"}/>
                 </Typography>
             </Image>
         </ImageButton>
